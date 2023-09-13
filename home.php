@@ -88,59 +88,158 @@
 
 
 
-        function lunghezza($password){
-        if(strlen($password) >= 8){
-            return true;
-    }
-        echo("Deve contenere almeno 8 caratteri! \n");
-}
+//         function lunghezza($password){
+//         if(strlen($password) >= 8){
+//             return true;
+//     }
+//         echo("Deve contenere almeno 8 caratteri! \n");
+// }
 
 
-    function numero($password){
-        for($i = 0; $i < strlen($password); $i++){
-        if(is_numeric ($password[$i])){
-            return true;
-    }}
-    echo("Deve contenere almeno un numero! \n");
-}
+//     function numero($password){
+//         for($i = 0; $i < strlen($password); $i++){
+//         if(is_numeric ($password[$i])){
+//             return true;
+//     }}
+//     echo("Deve contenere almeno un numero! \n");
+// }
 
-    function uppercase($password){
-        for($i = 0; $i < strlen($password); $i++){
-        if(ctype_upper($password[$i])){
-        return true;
-    }}
-    echo("Deve contenere almeno una lettera maiuscola! \n");
-}
+//     function uppercase($password){
+//         for($i = 0; $i < strlen($password); $i++){
+//         if(ctype_upper($password[$i])){
+//         return true;
+//     }}
+//     echo("Deve contenere almeno una lettera maiuscola! \n");
+// }
 
-    function special($password){
-        if(preg_match('/[!@#$%^&*()\-_=+[\]{};:\'",.<>?~`]/', $password)){
-            return true;
-        }
-        echo("Deve contenere almeno un carattere speciale! \n");
-        }
+//     function special($password){
+//         if(preg_match('/[!@#$%^&*()\-_=+[\]{};:\'",.<>?~`]/', $password)){
+//             return true;
+//         }
+//         echo("Deve contenere almeno un carattere speciale! \n");
+//         }
     
 
 
-    function check(){
-        for ($i = 0; $i <= 4; $i++){
-        $password = readline("Inserisci la tua password: ");
-        $lunghezza = lunghezza($password);
-        $numero = numero($password);
-        $uppercase = uppercase($password);
-        $special = special($password);
+//     function check(){
+//         for ($i = 0; $i <= 4; $i++){
+//         $password = readline("Inserisci la tua password: ");
+//         $lunghezza = lunghezza($password);
+//         $numero = numero($password);
+//         $uppercase = uppercase($password);
+//         $special = special($password);
 
         
-            if($lunghezza && $numero && $uppercase && $special){
-                echo("La password è corretta");
-                break;
-        }elseif($i == 4){
-            echo("Hai superato i tentativi! Riprova più tardi");
-            break;
-        }else{
-            echo ("Riprova! \n");
-            continue;
+//             if($lunghezza && $numero && $uppercase && $special){
+//                 echo("La password è corretta");
+//                 break;
+//         }elseif($i == 4){
+//             echo("Hai superato i tentativi! Riprova più tardi");
+//             break;
+//         }else{
+//             echo ("Riprova! \n");
+//             continue;
+//         }
+//     }
+// }
+// check();
+
+
+
+
+
+
+class Machine{
+    public $caffè;
+    public $cappuccino;
+    public $thè;
+    public $cioccolato;
+
+    public function __construct($caffè, $cappuccino, $thè, $cioccolato){
+        $this->caffè = $caffè;
+        $this->cappuccino = $cappuccino;
+        $this->thè = $thè;
+        $this->cioccolato = $cioccolato;
+    }
+
+    public function caffè(){
+        $this->caffè->caffèDolce();
+    }
+
+}
+   
+    abstract class Caffè{
+        abstract function caffèDolce();
+        abstract function caffèAmaro();
+    }
+    // se scelgo Lavazza
+    class Lavazza extends Caffè{
+        public function caffèDolce(){
+            echo "Hai scelto caffè Lavazza dolce \n";
+        }
+
+        public function caffèAmaro(){
+            echo "Hai scelto caffè Lavazza amaro \n";
         }
     }
+    // se scelgo Quarta
+    class Quarta extends Caffè{
+        public function caffèDolce(){
+            echo "Hai scelto caffè Quarta dolce \n";
+        }
+
+        public function caffèAmaro(){
+            echo "Hai scelto caffè Quarta amaro \n";
+        }
+    }
+    
+    abstract class Cappuccino{
+
+        abstract function cappuccinoDolce();
+        abstract function cappuccinoAmaro();
+    }
+
+        class Crastan extends Cappuccino{
+            public function cappuccinoDolce(){
+                echo "Hai scelto il cappuccino dolce \n";
+    }
+            public function cappuccinoAmaro(){
+                echo "Hai scelto il cappuccino amaro \n";
+    }
 }
-check();
+
+
+    abstract class Thè{
+        
+        abstract function thèDolce();
+        abstract function thèAmaro();
+    }    
+    
+    class Twining extends Thè{
+        public function thèDolce(){
+            echo "Hai scelto un thé dolce \n";
+    }
+        public function thèAmaro(){
+            echo "Hai scelto un thé amaro \n";
+    }
+}
+
+    abstract class Cioccolato{
+        abstract function cioccolatoDolce();
+        abstract function cioccolatoAmaro();
+    }
+
+    class Ciobar extends Cioccolato{
+        public function cioccolatoDolce(){
+            echo "Hai scelto un cioccolato dolce\n";
+    }
+        public function cioccolatoAmaro(){
+            echo "Hai scelto un cioccolato amaro";
+        }
+    }
+
+    $machine = new Machine(new Quarta, new Crastan, new Twining, new Ciobar);
+    var_dump($machine);    
+    $machine->caffè();
+
 ?>
